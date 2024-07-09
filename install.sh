@@ -31,13 +31,14 @@ fi
 echo "Installing URS..."
 git clone --depth=1 https://github.com/JosephLai241/URS.git
 cd URS
+pip install numpy
 poetry install
 poetry run maturin develop --release
 
 # Install your CLI tool
 echo "Installing Manhwa Analyzer CLI..."
 cd ..
-git clone https://github.com/SpecialistSteak/manhwa-scraper-cli
+git clone https://github.com/SpecialistSteak/manhwa-scraper-cli.git
 cd manhwa_analyzer
 poetry install
 

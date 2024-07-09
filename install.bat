@@ -15,17 +15,22 @@ if errorlevel 1 (
     exit /b 1
 )
 
+:: Install Cargo
+curl -o rustup-init.exe https://win.rustup.rs/x86_64
+.\rustup-init.exe
+
 :: Install URS
 echo Installing URS...
 git clone --depth=1 https://github.com/JosephLai241/URS.git
 cd URS
 poetry install
+pip install numpy
 poetry run maturin develop --release
 
 :: Install Manhwa Analyzer CLI
 echo Installing Manhwa Analyzer CLI...
 cd ..
-git clone https://github.com/your_username/manhwa_analyzer.git
+git clone https://github.com/SpecialistSteak/manhwa-scraper-cli.git
 cd manhwa_analyzer
 poetry install
 
