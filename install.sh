@@ -27,6 +27,9 @@ if ! command_exists poetry; then
     exit 1
 fi
 
+# Install Cargo
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 # Install URS
 echo "Installing URS..."
 git clone --depth=1 https://github.com/JosephLai241/URS.git
@@ -39,7 +42,7 @@ poetry run maturin develop --release
 echo "Installing Manhwa Analyzer CLI..."
 cd ..
 git clone https://github.com/SpecialistSteak/manhwa-scraper-cli.git
-cd manhwa_analyzer
+cd manhwa-scraper-cli
 poetry install
 
 # Add your CLI to PATH
