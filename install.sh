@@ -37,7 +37,7 @@ poetry run maturin develop --release
 # Install your CLI tool
 echo "Installing Manhwa Analyzer CLI..."
 cd ..
-git clone https://github.com/your_username/manhwa_analyzer.git
+git clone https://github.com/SpecialistSteak/manhwa-scraper-cli
 cd manhwa_analyzer
 poetry install
 
