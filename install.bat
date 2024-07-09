@@ -24,9 +24,14 @@ echo Installing URS...
 git clone --depth=1 https://github.com/JosephLai241/URS.git
 cd URS
 poetry install
-pip install numpy
-pip install levenshtein
 poetry run maturin develop --release
+cd URS
+
+:: Install Troublesome Packages
+pip install praw
+pip install levenshtein
+pip install python-Levenshtein-wheels
+pip install numpy
 
 :: Install Manhwa Analyzer CLI
 echo Installing Manhwa Scraper CLI...
@@ -34,6 +39,7 @@ cd ..
 git clone https://github.com/SpecialistSteak/manhwa-scraper-cli.git
 cd manhwa-scraper-cli
 poetry install
+pip install -r requirements.txt
 
 :: Add CLI to PATH
 set "CLI_DIR=%cd%"

@@ -115,7 +115,9 @@ We provide an install script that automates the installation process. Follow the
 To run Manhwa Analyzer with default settings:
 
 ```
-manhwa-analyzer
+cd URS/manhwa-scraper-cli/
+poetry shell
+poetry run python main.py
 ```
 
 This will scrape the latest 500 posts from r/manhwa, process the data, and generate visualizations in the `output` directory.
