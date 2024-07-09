@@ -1,49 +1,39 @@
-#!/usr/bin/env bash
+@echo off
+setlocal enabledelayedexpansion
 
-# Function to check if a command exists
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
-}
+:: Check if Python 3.11+ is installed
+python --version 2>NUL
+if errorlevel 1 (
+    echo Error: Python 3.11 or higher is required.
+    exit /b 1
+)
 
-# Function to add directory to PATH
-add_to_path() {
-    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" ]]; then
-        setx PATH "%PATH%;$1"
-    else
-        echo "export PATH=\$PATH:$1" >> ~/.bashrc
-        source ~/.bashrc
-    fi
-}
+:: Check if Poetry is installed
+poetry --version 2>NUL
+if errorlevel 1 (
+    echo Error: Poetry is required. Please install it first.
+    exit /b 1
+)
 
-# Check Python version
-if ! command_exists python3.11; then
-    echo "Error: Python 3.11 or higher is required."
-    exit 1
-fi
-
-# Check if Poetry is installed
-if ! command_exists poetry; then
-    echo "Error: Poetry is required. Please install it first."
-    exit 1
-fi
-
-# Install URS
-echo "Installing URS..."
+:: Install URS
+echo Installing URS...
 git clone --depth=1 https://github.com/JosephLai241/URS.git
 cd URS
 poetry install
 poetry run maturin develop --release
 
-# Install your CLI tool
-echo "Installing Manhwa Analyzer CLI..."
+:: Install Manhwa Analyzer CLI
+echo Installing Manhwa Analyzer CLI...
 cd ..
 git clone https://github.com/your_username/manhwa_analyzer.git
 cd manhwa_analyzer
 poetry install
 
-# Add your CLI to PATH
-CLI_DIR=$(pwd)
-add_to_path "$CLI_DIR"
+:: Add CLI to PATH
+set "CLI_DIR=%cd%"
+setx PATH "%PATH%;%CLI_DIR%"
 
-echo "Installation complete!"
-echo "Please restart your terminal or run 'source ~/.bashrc' (on Unix-like systems) to update your PATH."
+echo Installation complete!
+echo Please restart your command prompt to update your PATH.
+
+endlocal
